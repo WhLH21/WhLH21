@@ -1,0 +1,85 @@
+This is my first programm:
+
+import pickle
+import sys
+import os
+
+book = {
+
+}
+
+print ("Добро пожаловать в Телефонную книгу!")
+
+book_number = "book_number.data"
+
+#Check for data exist
+if os.path.exists("C:/Users/admin/Desktop/Python/book_number.data") == True:
+
+    f = open(book_number, "rb")
+
+    book = pickle.load(f)
+
+    f.close()
+else:
+    pass
+
+
+
+
+# Choose the function
+user_invet = input("Что хотите сделать?\nДобавить контакт, Удалить контакт, Редактировать контакт, Посмотреть книгу, Поиск номера: ")
+
+
+#Add contact fuction
+if user_invet == "Добавить контакт":
+
+    add_name_book = input ("Пожалуйста, напишите Имя контакта: ")
+    add_number_book = input("Теперь номер: ")
+    book[add_name_book] = add_number_book
+
+
+    print ("Контакт " + add_name_book + " с номером " + str(add_number_book) + " успешно добавлен!")
+
+#Edit contact fuction
+elif user_invet == "Редактировать контакт":
+    red_contact = input ("Какой контакт хотите редактировать?: ")
+    red_number = input ("На какой номер хотите заменить?: ")
+
+    book[red_contact] = red_number
+    print("Номера контакта " + red_contact + " успешно изменен на " + str(red_number) + "!")
+    
+    
+#Deleete contact fuction
+elif user_invet == "Удалить контакт":
+    delete_contact = input("Какой контакт удалить?: ")
+    del book[delete_contact]
+    print ("Контакт " + str(delete_contact) + " успешно удален!")
+    
+    
+#Watch Telephone_book fuction
+elif user_invet == "Посмотреть книгу":
+    print ("Телефонная книга: ")
+    print (book)
+    
+    
+#Search contact fuction
+elif user_invet == "Поиск номера":
+    search_number = input("Введите Имя контакта: ")
+    print ("Номер контакта " + search_number+ " - " + book[search_number])
+
+else:
+
+    print ("Неверная команда")
+
+#Create data_file if it is not exist
+f = open(book_number, "wb")
+pickle.dump(book, f)
+f.close()
+
+print ("Программа завершена!")
+
+
+
+
+
+
